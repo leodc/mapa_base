@@ -1,0 +1,22 @@
+{
+  "name": "mapa_base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leodc/mapa_base.git"
+  },
+  "author": "Leonel Castañeda <leodcastaneda@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leodc/mapa_base/issues"
+  },
+  "homepage": "https://github.com/leodc/mapa_base#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
