@@ -25,10 +25,6 @@ function buildMap(config){
   if(config.locate){
     addLocateButton(map, "topright");
   }
-
-  if(config.onClick){
-    map.on("click", config.onClick);
-  }
 }
 
 function addLocateButton(map, position){
