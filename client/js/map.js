@@ -6,7 +6,7 @@ function buildMap(config){
   }).addTo(map);
 
   if(config.locate){
-    addLocateButton(map);
+    addLocateButton(map, "topright");
   }
 
   $(window).on("resize", function(){
@@ -16,15 +16,15 @@ function buildMap(config){
   window.map = map;
 }
 
-function addLocateButton(map){
+function addLocateButton(map, position){
   L.control.locate({
-    position: "topright",
+    position: position,
     strings: {
       title: "Mostrar mi ubicación",
       metersUnit: "metros",
       feetUnit: "pies",
-      popup: "Estás dentro de {distance} {unit} desde este punto",
-      outsideMapBoundsMsg: "Error: Fuera de los límites del mapa."
+      popup: "Estás en un radio de {distance} {unit} desde este punto",
+      outsideMapBoundsMsg: "Parece que estas fuera de los límites del mapa."
     }
   }).addTo(map);
 }
