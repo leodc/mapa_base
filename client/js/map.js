@@ -10,10 +10,21 @@ function buildMap(config){
 
   // layerControls
   var layerControl = L.control.layers({"OpenStreetMap": osmLayer}, {}, {collapsed: false}).addTo(map);
-  map.createLayer = function(id, title){
-    var layer = L.geoJSON(null).addTo(map);
-    if(title){
-      layerControl.addOverlay(layer, title);
+  map.createLayer = function(id, options){
+    options = (options) ? options:{};
+
+    var layerOptions = {};
+    if(options.style){
+      layerOptions.style = options.style;
+    }
+
+    var layer = L.geoJSON(null, layerOptions).addTo(map);
+    if(options.title){
+      layerControl.addOverlay(layer, options.title);
+    }
+
+    if(options.popup){
+      layer.bindPopup(options.popup);
     }
 
     window.layers[id] = layer;
