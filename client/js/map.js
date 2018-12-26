@@ -1,10 +1,24 @@
 function buildMap(config){
+  window.layers = {}
+
   // base map
   var map = L.map("map", config["options"]).setView(config["initial_view"], config["initial_zoom"]);
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  var osmLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
+
+  // layerControls
+  var layerControl = L.control.layers({"OpenStreetMap": osmLayer}, {}, {collapsed: false}).addTo(map);
+  map.createLayer = function(id, title){
+    var layer = L.geoJSON(null).addTo(map);
+    if(title){
+      layerControl.addOverlay(layer, title);
+    }
+
+    window.layers[id] = layer;
+    return layer;
+  }
 
   $(window).on("resize", function(){
     map.invalidateSize();
@@ -23,7 +37,7 @@ function buildMap(config){
   }
 
   if(config.locate){
-    addLocateButton(map, "topright");
+    addLocateButton(map, "topleft");
   }
 }
 
