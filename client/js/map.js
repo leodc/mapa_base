@@ -13,6 +13,15 @@ function buildMap(config){
   window.map = map;
 
   // options
+  if(config.maxBounds){
+    var corner1 = L.latLng(config.maxBounds[1], config.maxBounds[0]);
+    var corner2 = L.latLng(config.maxBounds[3], config.maxBounds[2]);
+
+    var maxBounds = L.latLngBounds(corner1, corner2);
+    map.fitBounds( maxBounds );
+    map.setMaxBounds( maxBounds );
+  }
+
   if(config.locate){
     addLocateButton(map, "topright");
   }
